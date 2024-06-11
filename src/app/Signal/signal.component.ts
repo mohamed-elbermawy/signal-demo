@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
 
 @Component({
   selector: 'app-signal',
@@ -7,21 +7,23 @@ import { Component } from '@angular/core';
 })
 export class SignalComponent {
   price: number = 100;
-  total: number = 0;
-  quantity: number = 0;
+  total = computed(() => this.price * this.quantity());
+  quantity = signal<number>(0);
+
+  constructor() {}
 
   increase(): void {
-    this.quantity++;
-    this.total = this.price * this.quantity;
+    // this.quantity.set(this.quantity() + 1);
+    this.quantity.update((oldValue) => oldValue + 1);
   }
-  
+
   decrease(): void {
-    if ((this.quantity - 1) > 0) {
-      this.quantity--;
-      this.total = this.price * this.quantity;
+    if (this.quantity() - 1 > 0) {
+      // this.quantity.set(this.quantity() - 1);
+      this.quantity.update((oldValue) => oldValue - 1);
     } else {
-      this.quantity = 0;
-      this.total = 0;
+      // this.quantity.set(0);
+      this.quantity.update((oldValue) => 0);
     }
   }
 }
