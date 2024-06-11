@@ -1,6 +1,22 @@
-<h2>Update values using Default Behavior (Change Detection)</h2>
-Price: {{ price }}
-<button (click)="decrease()">-</button>
-<span>{{ quantity }}</span>
-<button (click)="increase()">+</button>
-Total : {{ total }}
+<div class="mt-3 text-center">
+    <h1 class="font-bold mb-5">Update values using Default Behavior (Change Detection)</h1>
+    <div>
+      <p class="text-2xl mb-5">Price: <span class="text-red-600">{{ price }}</span></p>
+      <div class="flex flex-row justify-center content-center mb-5">
+          <button mat-raised-button color="primary" class="mr-5" (click)="decrease()">-</button>
+          <span>{{ quantity }}</span>
+          <button mat-raised-button color="primary" class="ml-5" (click)="increase()">+</button>
+      </div>
+  
+      <p class="text-2xl mb-5">Total: <span class="text-red-600">{{ total }}</span></p>
+  
+      <div class="flex flex-row justify-center content-center mb-5">
+          <button mat-raised-button color="warn" class="mr-5" (click)="rest()">reset</button>
+          <button mat-raised-button color="warn" (click)="restOldTotals()">Reset Old Totals</button>
+      </div>
+      <p class="text-2xl mb-5">Old Totals</p>
+      
+      <div *ngFor="let item of updatedTotal"><span class="text-red-600">{{ item }}</span></div>
+    </div>
+  </div>
+  
